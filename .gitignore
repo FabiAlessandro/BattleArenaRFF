@@ -1,0 +1,11 @@
+*.class
+
+.idea
+.vscode
+.venv
+bin/
+out/
+
+*.txt
+*.dat
+*.iml
