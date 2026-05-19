@@ -1,30 +1,62 @@
 package battlearena.model;
 
-// Dati e comportamenti base di un personaggio.
-public interface Personaggio {
-    enum TipoPersonaggio {
-        FUOCO, ACQUA, ERBA
+import java.util.ArrayList;
+
+public class Personaggio implements PersonaggioInt{
+
+    private static final int MAX_HP = 100;
+    private static final int MIN_HP = 0;
+    private String nome;
+    private int hp;
+    private TipoPersonaggio tipo;
+    private ArrayList<Mossa> mosse;
+    private String path;
+
+    public Personaggio(String nome,TipoPersonaggio tipo,String path){
+        this.nome = nome;
+        this.tipo = tipo;
+        this.path = path;
+        hp = MAX_HP;
+        mosse = new ArrayList<>();
     }
-    /** Nome visualizzato del personaggio. */
-    String getNome();
 
-    /** HP attuali del personaggio. */
-    int getHp();
+    @Override
+    public String getNome() {
+        return nome;
+    }
 
-    /** HP massimi del personaggio. */
-    int getHpMax();
+    @Override
+    public int getHp() {
+        return hp;
+    }
 
-    /** Applica un danno al personaggio. */
-    void subisciDanno(int danno);
+    @Override
+    public int getHpMax() {
+        return MAX_HP;
+    }
 
-    /** Indica se il personaggio e ancora vivo. */
-    boolean isVivo();
+    @Override
+    public void subisciDanno(int danno) {
+        hp =- danno;
+    }
 
-    TipoPersonaggio getTipo();
+    @Override
+    public boolean isVivo() {
+        return hp>MIN_HP;
+    }
 
-    /** Elenco delle mosse disponibili. */
-    Mossa[] getMosseDisponibili();
+    @Override
+    public TipoPersonaggio getTipo() {
+        return tipo;
+    }
 
-    /** Percorso dell'immagine per l'icona. */
-    String getPercorsoImmagine();
+    @Override
+    public Mossa[] getMosseDisponibili() {
+        return mosse.toArray(new Mossa[]{});
+    }
+
+    @Override
+    public String getPercorsoImmagine() {
+        return path;
+    }
 }
